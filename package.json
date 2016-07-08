@@ -1,0 +1,30 @@
+{
+  "name": "component-kit-builder",
+  "version": "1.0.0",
+  "description": "builds component kits using webpack require.context",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antialias/component-kit-builder.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/antialias/component-kit-builder/issues"
+  },
+  "homepage": "https://github.com/antialias/component-kit-builder#readme",
+  "devDependencies": {
+    "dedent": "^0.6.0",
+    "mocha": "^2.5.3",
+    "rimraf": "^2.5.3",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "lodash.flow": "^3.3.0",
+    "object.values": "^1.0.3"
+  }
+}

@@ -2,10 +2,15 @@
 
 ## usage
 
+If you structure your components like this:
+```txt
 path/to/component
  +- component.js // basic react component
  +- redux.js // redux component wrapper
  +- relay.js // realy component wrapper
+```
+
+You can use `component-kit-builder` to build a _component kit_ around your component for easy export and usage of your component wrapper functions.
 
 ```js
 // any file processed by webpack

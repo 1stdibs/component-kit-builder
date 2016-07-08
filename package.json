@@ -1,6 +1,6 @@
 {
   "name": "component-kit-builder",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "builds component kits using webpack require.context",
   "main": "index.js",
   "scripts": {

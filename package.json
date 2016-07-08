@@ -19,6 +19,7 @@
   "homepage": "https://github.com/antialias/component-kit-builder#readme",
   "devDependencies": {
     "dedent": "^0.6.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
     "rimraf": "^2.5.3",
     "webpack": "^1.13.1"

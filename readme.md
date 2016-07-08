@@ -1,3 +1,5 @@
+![travis ci status](https://api.travis-ci.org/antialias/component-kit-builder.svg)
+
 # component-kit-builder
 
 ## usage

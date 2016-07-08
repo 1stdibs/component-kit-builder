@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/component-kit-builder.svg)](https://badge.fury.io/js/component-kit-builder)
 ![travis ci status](https://api.travis-ci.org/antialias/component-kit-builder.svg)
 
 # component-kit-builder

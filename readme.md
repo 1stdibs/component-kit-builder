@@ -19,11 +19,11 @@ kit = componentKitBuilder(require.context('path/to/component/directory'));
 ```
 
 `kit` now has the following properties:
-* component // component exported form `component.js`
-* relay // relay wrapper exported from relay.js
-* redux // reduc wrapper exported from redux.js
-* relay_wrapped // component wrapped by relay wrapper
-* redux_wrapped // component wrapped by redux wrapper
-* complete // component wrapped by redux and relay
+* __component__  – component exported form `component.js`
+* __relay__  – relay wrapper exported from relay.js
+* __redux__  – reduc wrapper exported from redux.js
+* __relay_wrapped__ – component wrapped by relay wrapper
+* __redux_wrapped__ – component wrapped by redux wrapper
+* __complete__ – component wrapped by redux and relay
 
 By default, modules whose pre-extension filename are `relay` and `redux` are considered wrappers and included in `complete` and create `_wrapped` properties on the kit. A custom list of wrappers for `component` can be defined in the `wrappers` export in `index.js`.

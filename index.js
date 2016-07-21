@@ -12,9 +12,15 @@ module.exports = function (context) {
             [context.resolve(key)]: key
         })
     }, {});
-    const moduleMap = values(uniquePaths).reduce((obj, key) => Object.assign({}, obj, {
-        [path.relative('.', key)]: context(key)
-    }), {});
+    const moduleMap = values(uniquePaths).reduce((obj, key) => {
+        let contextForKey = context(key);
+        if (contextForKey.default) {
+            contextForKey = contextForKey.default;
+        }
+        return Object.assign({}, obj, {
+            [path.relative('.', key)]: contextForKey
+        })
+    }, {});
     let wrappersList = ['redux', 'relay'];
     if (moduleMap.index && moduleMap.index.wrappers) {
         wrappersList = moduleMap.index.wrappers

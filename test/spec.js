@@ -75,4 +75,9 @@ describe('component kit builder', function () {
         buildBundle();
         assert(require(bundlePath).complete(), 'redux relay component');
     });
+    it('should work with es6-style default exports', function () {
+        fs.writeFileSync(path.join(myComponentDir, 'redux.js'), `module.exports = {default: x => y => y(\`redux \${x}\`)};`);
+        buildBundle();
+        require(bundlePath);
+    });
 });

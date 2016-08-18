@@ -2,6 +2,7 @@
 const flow = require('lodash.flow');
 const path = require('path');
 const values = require('object.values');
+const hoist = require('hoist-non-react-statics');
 module.exports = function (context) {
     const uniquePaths = context.keys().reduce((obj, key) => {
         const existingKey = obj[context.resolve(key)];
@@ -29,12 +30,12 @@ module.exports = function (context) {
     return Object.assign({}, moduleMap,
         {
             complete: wrappersList.reduce(
-                (complete, moduleName) => flow(moduleMap[moduleName], complete),
+                (complete, moduleName) => hoist(moduleMap[moduleName](complete), complete),
                 moduleMap.component
             )
         },
         wrappersList.reduce((obj, moduleName) => Object.assign({}, obj, {
-            [`${moduleName}_wrapped`]: moduleMap[moduleName](moduleMap.component)
+            [`${moduleName}_wrapped`]: hoist(moduleMap[moduleName](moduleMap.component), moduleMap.component)
         }), {})
     );
 };

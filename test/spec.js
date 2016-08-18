@@ -20,8 +20,8 @@ describe('component kit builder', function () {
         mkdirp(testTmp);
         mkdirp(myComponentDir);
         fs.writeFileSync(path.join(myComponentDir, 'component.js'), `module.exports = x => \`component \${x}\`;`);
-        fs.writeFileSync(path.join(myComponentDir, 'redux.js'), `module.exports = x => y => y(\`redux \${x}\`);`);
-        fs.writeFileSync(path.join(myComponentDir, 'relay.js'), `module.exports = x => y => y(\`relay \${x}\`);`);
+        fs.writeFileSync(path.join(myComponentDir, 'redux.js'), `module.exports = x => y => x(\`redux \${y}\`);`);
+        fs.writeFileSync(path.join(myComponentDir, 'relay.js'), `module.exports = x => y => x(\`relay \${y}\`);`);
         fs.writeFileSync(path.join(testTmp, 'build-manager.js'), dedent`
             const kitBuilder = require('${path.relative(testTmp, require.resolve('..'))}')
             module.exports = kitBuilder(require.context('./${path.relative(testTmp, myComponentDir)}/'));
@@ -80,4 +80,20 @@ describe('component kit builder', function () {
         buildBundle();
         require(bundlePath);
     });
+    it('should hoist static properties through composition', function () {
+        fs.writeFileSync(path.join(myComponentDir, 'component.js'), `
+        module.exports = Object.assign(x => \`component \${x}\`, {componentStaticProp: true});
+        `);
+        fs.writeFileSync(path.join(myComponentDir, 'redux.js'), `
+        module.exports = x => Object.assign(y => y(\`redux \${x}\`), {reduxStaticProp: true});
+        `);
+        fs.writeFileSync(path.join(myComponentDir, 'relay.js'), `
+        module.exports = x => Object.assign(y => y(\`relay \${x}\`), {relayStaticProp: true});
+        `);
+        buildBundle();
+        const bundle = require(bundlePath);
+        assert(bundle.complete.reduxStaticProp);
+        assert(bundle.complete.relayStaticProp);
+        assert(bundle.complete.componentStaticProp);
+    })
 });

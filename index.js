@@ -29,7 +29,7 @@ module.exports = function (context) {
     wrappersList = wrappersList.filter(moduleName => moduleMap[moduleName]);
     return Object.assign({}, moduleMap,
         {
-            complete: wrappersList.reduce(
+            default: wrappersList.reduce(
                 (complete, moduleName) => hoist(moduleMap[moduleName](complete), complete),
                 moduleMap.component
             )

@@ -39,7 +39,7 @@ describe('component kit builder', function () {
                 'relay',
                 'relay_wrapped',
                 'component',
-                'complete'
+                'default'
             ].sort(),
             Object.keys(require(bundlePath)).sort()
         );
@@ -52,7 +52,7 @@ describe('component kit builder', function () {
                 'redux',
                 'redux_wrapped',
                 'component',
-                'complete'
+                'default'
             ].sort(),
             Object.keys(require(bundlePath)).sort()
         );
@@ -66,14 +66,14 @@ describe('component kit builder', function () {
                 'relay_wrapped',
                 'redux_wrapped',
                 'component',
-                'complete'
+                'default'
             ].sort(),
             Object.keys(require(bundlePath)).sort()
         );
     });
     it('should compose all the composable wrappers together', function () {
         buildBundle();
-        assert(require(bundlePath).complete(), 'redux relay component');
+        assert(require(bundlePath).default(), 'redux relay component');
     });
     it('should work with es6-style default exports', function () {
         fs.writeFileSync(path.join(myComponentDir, 'redux.js'), `module.exports = {default: x => y => y(\`redux \${x}\`)};`);
@@ -92,8 +92,8 @@ describe('component kit builder', function () {
         `);
         buildBundle();
         const bundle = require(bundlePath);
-        assert(bundle.complete.reduxStaticProp);
-        assert(bundle.complete.relayStaticProp);
-        assert(bundle.complete.componentStaticProp);
+        assert(bundle.default.reduxStaticProp);
+        assert(bundle.default.relayStaticProp);
+        assert(bundle.default.componentStaticProp);
     })
 });
